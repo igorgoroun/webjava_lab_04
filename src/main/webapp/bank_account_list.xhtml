@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <title>Partners</title>
+        <h:outputStylesheet library="css" name="main.css"/>
+    </h:head>
+    <h:body>
+        <header>
+            <nav class="container">
+                <a href="index.xhtml">Головна</a>
+                <a href="partner_list.xhtml">Партнери</a>
+                <a href="bank_account_list.xhtml" class="active">Банківськи рахунки</a>
+            </nav>
+        </header>
+        <main class="container">
+            <h1 class="display center">Банківські рахунки</h1>
+            <h:form role="form">
+            <h:dataTable value="#{bankAccountBean.getList()}" var="b">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{b.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">IBAN</f:facet>
+                    <h:outputText value="#{b.iban}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Контрагент</f:facet>
+                    <h:outputText value="#{b.partner_name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Банк</f:facet>
+                    <h:outputText value="#{b.bank_name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> </f:facet>
+                    <h:commandButton value="Видалити" action="#{bankAccountBean.delete(b.id)}"/>
+                </h:column>
+            </h:dataTable>
+            </h:form>
+
+            <h2 class="display center">Додати новий</h2>
+            <h:form role="form">
+                <div class="input_row">
+                    <h:outputLabel value="Номер рахунку:"/>
+                    <h:inputText value="#{bankAccountBean.bank.iban}"/>
+                </div>
+                <div class="input_row">
+                    <h:outputLabel value="Назва банку:"/>
+                    <h:inputText value="#{bankAccountBean.bank.bank_name}"/>
+                </div>
+                <div class="input_row">
+                    <h:outputLabel value="Партнер:"/>
+                    <h:selectOneListbox value = "#{bankAccountBean.bank.partner_id}" size="1">
+                        <f:selectItems value="#{partnerBean.list}" var="p" itemValue="#{p.id}" itemLabel="#{p.name}" />
+                    </h:selectOneListbox>
+                </div>
+
+                <div class="input_row">
+                    <label> </label>
+                    <h:commandButton value="Зберегти" action="#{bankAccountBean.create()}"/>
+                </div>
+            </h:form>
+        </main>
+    </h:body>
+</f:view>
+</html>
+

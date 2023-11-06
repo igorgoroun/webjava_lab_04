@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <title>Partners</title>
+        <h:outputStylesheet library="css" name="main.css"/>
+    </h:head>
+    <h:body>
+        <header>
+            <nav class="container">
+                <a href="index.xhtml">Головна</a>
+                <a href="partner_list.xhtml" class="active">Партнери</a>
+                <a href="bank_account_list.xhtml" class="">Банківськи рахунки</a>
+            </nav>
+        </header>
+        <main class="container">
+            <h1 class="display center">Партнери</h1>
+            <h:dataTable value="#{partnerBean.getList()}" var="p">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{p.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputText value="#{p.name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Тел.</f:facet>
+                    <h:outputText value="#{p.tel_number}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">ЄДРПОУ</f:facet>
+                    <h:outputText value="#{p.reg}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> </f:facet>
+                    <h:commandButton value="Видалити" action="#{partnerBean.delete(p.id)}"/>
+                </h:column>
+            </h:dataTable>
+
+            <h2 class="display center">Додати нового</h2>
+            <h:form role="form">
+                <div class="input_row">
+                    <h:outputLabel value="Назва:"/>
+                    <h:inputText value="#{partnerBean.partner.name}"/>
+                </div>
+                <div class="input_row">
+                    <h:outputLabel value="Адреса:"/>
+                    <h:inputText value="#{partnerBean.partner.address}"/>
+                </div>
+                <div class="input_row">
+                    <h:outputLabel value="Телефон:"/>
+                    <h:inputText value="#{partnerBean.partner.tel_number}"/>
+                </div>
+                <div class="input_row">
+                    <h:outputLabel value="ІПН:"/>
+                    <h:inputText value="#{partnerBean.partner.itn}"/>
+                </div>
+                <div class="input_row">
+                    <h:outputLabel value="ЄДРПОУ:"/>
+                    <h:inputText value="#{partnerBean.partner.reg}"/>
+                </div>
+                <div class="input_row">
+                    <h:outputLabel value="Notes:"/>
+                    <h:inputText value="#{partnerBean.partner.notes}"/>
+                </div>
+                <div class="input_row">
+                    <label> </label>
+                    <h:commandButton value="Зберегти" action="#{partnerBean.addRecord()}"/>
+                </div>
+            </h:form>
+        </main>
+    </h:body>
+</f:view>
+</html>
+

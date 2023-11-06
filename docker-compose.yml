@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+  db:
+    image: postgres:13
+    container_name: weblab_db
+    restart: unless-stopped
+    env_file: .env
+    user: ${PSQL_UID}:${PSQL_GID}
+    environment:
+      POSTGRES_DB: ${PSQL_DB_NAME}
+      POSTGRES_USER: ${PSQL_DB_USER}
+      POSTGRES_PASSWORD: ${PSQL_DB_PASSWD}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      -
+        type: bind
+        source: ./.db
+        target: /var/lib/postgresql/data
