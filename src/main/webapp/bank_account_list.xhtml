@@ -50,14 +50,14 @@
             <h:form role="form">
                 <div class="input_row">
                     <h:outputLabel value="Партнер:"/>
-                    <h:selectOneListbox value = "#{partnersBankBean.selectedPartner}" size="1" >
-                        <f:selectItems value="#{partnerBean.list}" var="p" itemValue="#{p}" itemLabel="#{p.name}" />
+                    <h:selectOneListbox value = "#{partnersBankBean.partnersBank.partner.id}" size="1" >
+                        <f:selectItems value="#{partnerBean.list}" var="p" itemValue="#{p.id}" itemLabel="#{p.name}" />
                     </h:selectOneListbox>
                 </div>
                 <div class="input_row">
                     <h:outputLabel value="Банк:"/>
-                    <h:selectOneListbox value="#{partnersBankBean.selectedBank}" size="1">
-                        <f:selectItems value="#{bankBean.list}" var="bb" itemValue="#{bb}" itemLabel="#{bb.name}" />
+                    <h:selectOneListbox value="#{partnersBankBean.partnersBank.bank.id}" size="1">
+                        <f:selectItems value="#{bankBean.list}" var="bb" itemValue="#{bb.id}" itemLabel="#{bb.name}" />
                     </h:selectOneListbox>
                 </div>
                 <div class="input_row">
