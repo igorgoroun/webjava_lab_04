@@ -21,8 +21,9 @@ public class BankAccountDao {
     public List<BankAccount> listForPartner(int partner_id) {
         String query =
                 "select " +
-                    "b.id, b.partner_id, b.iban, b.bank_name, b.actual " +
-                    "from banks b " +
+                    "b.id, b.partner_id, b.iban, bn.name as bank_name, b.actual " +
+                    "from partners_banks b " +
+                    "left join banks bn on bn.id=b.bank_id " +
                     "where b.partner_id=?" +
                     "order by actual desc";
 
@@ -41,10 +42,11 @@ public class BankAccountDao {
     public List<BankAccount> listAll() {
         String query =
                 "select " +
-                        "b.id, b.partner_id, b.iban, b.bank_name, b.actual, p.name as partner_name " +
-                        "from banks b " +
+                        "b.id, b.partner_id, b.iban, bn.id as bank_id, bn.name as bank_name, b.actual, p.name as partner_name " +
+                        "from partners_banks b " +
                         "left join partners p on p.id=b.partner_id " +
-                        "order by actual desc";
+                        "left join banks bn on bn.id=b.bank_id " +
+                        "order by b.actual desc";
         try (
                 Connection connection = psql.getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
@@ -66,6 +68,7 @@ public class BankAccountDao {
                     rs.getInt("partner_id"),
                     rs.getString("partner_name"),
                     rs.getString("iban"),
+                    rs.getInt("bank_id"),
                     rs.getString("bank_name"),
                     rs.getBoolean("actual")
             ));
@@ -75,7 +78,7 @@ public class BankAccountDao {
 
     public void create(BankAccount bank) {
         String query =
-                "insert into banks (iban, partner_id, bank_name, actual) " +
+                "insert into partners_banks (iban, partner_id, bank_id, actual) " +
                 "values (?, ?, ?, ?)";
         try (
                 Connection connection = psql.getConnection();
@@ -83,7 +86,7 @@ public class BankAccountDao {
         ) {
             ps.setString(1, bank.getIban());
             ps.setInt(2, bank.getPartner_id());
-            ps.setString(3, bank.getIban());
+            ps.setInt(3, bank.getBank_id());
             ps.setBoolean(4, bank.getActual());
             ps.executeUpdate();
         } catch (SQLException ex) {
@@ -92,7 +95,7 @@ public class BankAccountDao {
     }
 
     public void delete(int id) {
-        String query = "delete from banks where id=?";
+        String query = "delete from partners_banks where id=?";
         try (
                 Connection connection = psql.getConnection();
                 PreparedStatement ps = connection.prepareStatement(query)

@@ -20,33 +20,7 @@
             </nav>
         </header>
         <main class="container">
-            <h1 class="display center">Партнери</h1>
-            <h:form role="form">
-            <h:dataTable value="#{partnerBean.getList()}" var="p">
-                <h:column>
-                    <f:facet name="header">ID</f:facet>
-                    <h:outputText value="#{p.id}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Name</f:facet>
-                    <h:outputText value="#{p.name}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Тел.</f:facet>
-                    <h:outputText value="#{p.tel_number}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">ЄДРПОУ</f:facet>
-                    <h:outputText value="#{p.reg}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> </f:facet>
-                    <h:commandButton value="Видалити" action="#{partnerBean.delete(p.id)}"/>
-                </h:column>
-            </h:dataTable>
-            </h:form>
-
-            <h2 class="display center">Додати нового</h2>
+            <h2 class="display center">Форма партнера</h2>
             <h:form role="form">
                 <div class="input_row">
                     <h:outputLabel value="Назва:"/>

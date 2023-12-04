@@ -12,6 +12,7 @@ public class BankAccount {
     private int partner_id;
     private String partner_name = null;
     private String iban;
-    private String bank_name;
+    private int bank_id;
+    private String bank_name = null;
     private Boolean actual = Boolean.FALSE;
 }

@@ -15,7 +15,8 @@
             <nav class="container">
                 <a href="index.xhtml">Головна</a>
                 <a href="partner_list.xhtml">Партнери</a>
-                <a href="bank_account_list.xhtml" class="active">Банківськи рахунки</a>
+                <a href="bank_account_list.xhtml" class="active">Банки партнерів</a>
+                <a href="banks_list.xhtml" class="">Банки</a>
             </nav>
         </header>
         <main class="container">
@@ -48,19 +49,25 @@
             <h2 class="display center">Додати новий</h2>
             <h:form role="form">
                 <div class="input_row">
-                    <h:outputLabel value="Номер рахунку:"/>
-                    <h:inputText value="#{bankAccountBean.bank.iban}"/>
-                </div>
-                <div class="input_row">
-                    <h:outputLabel value="Назва банку:"/>
-                    <h:inputText value="#{bankAccountBean.bank.bank_name}"/>
-                </div>
-                <div class="input_row">
                     <h:outputLabel value="Партнер:"/>
                     <h:selectOneListbox value = "#{bankAccountBean.bank.partner_id}" size="1">
                         <f:selectItems value="#{partnerBean.list}" var="p" itemValue="#{p.id}" itemLabel="#{p.name}" />
                     </h:selectOneListbox>
                 </div>
+                <div class="input_row">
+                    <h:outputLabel value="Банк:"/>
+                    <h:selectOneListbox value = "#{bankAccountBean.bank.bank_id}" size="1">
+                        <f:selectItems value="#{bankBean.list}" var="b" itemValue="#{b.id}" itemLabel="#{b.name}" />
+                    </h:selectOneListbox>
+                </div>
+                <div class="input_row">
+                    <h:outputLabel value="Номер рахунку:"/>
+                    <h:inputText value="#{bankAccountBean.bank.iban}"/>
+                </div>
+<!--                <div class="input_row">-->
+<!--                    <h:outputLabel value="Назва банку:"/>-->
+<!--                    <h:inputText value="#{bankAccountBean.bank.bank_name}"/>-->
+<!--                </div>-->
 
                 <div class="input_row">
                     <label> </label>
