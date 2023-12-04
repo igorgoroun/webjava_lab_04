@@ -20,7 +20,7 @@
             </nav>
         </header>
         <main class="container">
-            <h2 class="display center">Форма партнера</h2>
+            <h2 class="display center">Оновлення партнера</h2>
             <h:form role="form">
                 <div class="input_row">
                     <h:outputLabel value="Назва:"/>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="input_row">
                     <h:outputLabel value="Телефон:"/>
-                    <h:inputText value="#{partnerBean.partner.tel_number}"/>
+                    <h:inputText value="#{partnerBean.partner.telNumber}"/>
                 </div>
                 <div class="input_row">
                     <h:outputLabel value="ІПН:"/>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="input_row">
                     <label> </label>
-                    <h:commandButton value="Зберегти" action="#{partnerBean.addRecord()}"/>
+                    <h:commandButton value="Зберегти" action="#{partnerBean.update()}"/>
                 </div>
             </h:form>
         </main>

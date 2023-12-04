@@ -22,7 +22,7 @@
         <main class="container">
             <h1 class="display center">Банківські рахунки</h1>
             <h:form role="form">
-            <h:dataTable value="#{bankAccountBean.getList()}" var="b">
+            <h:dataTable value="#{partnersBankBean.list}" var="b">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                     <h:outputText value="#{b.id}"/>
@@ -33,15 +33,15 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">Контрагент</f:facet>
-                    <h:outputText value="#{b.partner_name}"/>
+                    <h:outputText value="#{b.partner.name}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">Банк</f:facet>
-                    <h:outputText value="#{b.bank_name}"/>
+                    <h:outputText value="#{b.bank.name}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header"> </f:facet>
-                    <h:commandButton value="Видалити" action="#{bankAccountBean.delete(b.id)}"/>
+                    <h:commandButton value="Видалити" action="#{partnersBankBean.delete(b.id)}"/>
                 </h:column>
             </h:dataTable>
             </h:form>
@@ -50,28 +50,23 @@
             <h:form role="form">
                 <div class="input_row">
                     <h:outputLabel value="Партнер:"/>
-                    <h:selectOneListbox value = "#{bankAccountBean.bank.partner_id}" size="1">
-                        <f:selectItems value="#{partnerBean.list}" var="p" itemValue="#{p.id}" itemLabel="#{p.name}" />
+                    <h:selectOneListbox value = "#{partnersBankBean.selectedPartner}" size="1" >
+                        <f:selectItems value="#{partnerBean.list}" var="p" itemValue="#{p}" itemLabel="#{p.name}" />
                     </h:selectOneListbox>
                 </div>
                 <div class="input_row">
                     <h:outputLabel value="Банк:"/>
-                    <h:selectOneListbox value = "#{bankAccountBean.bank.bank_id}" size="1">
-                        <f:selectItems value="#{bankBean.list}" var="b" itemValue="#{b.id}" itemLabel="#{b.name}" />
+                    <h:selectOneListbox value="#{partnersBankBean.selectedBank}" size="1">
+                        <f:selectItems value="#{bankBean.list}" var="bb" itemValue="#{bb}" itemLabel="#{bb.name}" />
                     </h:selectOneListbox>
                 </div>
                 <div class="input_row">
                     <h:outputLabel value="Номер рахунку:"/>
-                    <h:inputText value="#{bankAccountBean.bank.iban}"/>
+                    <h:inputText value="#{partnersBankBean.partnersBank.iban}"/>
                 </div>
-<!--                <div class="input_row">-->
-<!--                    <h:outputLabel value="Назва банку:"/>-->
-<!--                    <h:inputText value="#{bankAccountBean.bank.bank_name}"/>-->
-<!--                </div>-->
-
                 <div class="input_row">
                     <label> </label>
-                    <h:commandButton value="Зберегти" action="#{bankAccountBean.create()}"/>
+                    <h:commandButton value="Зберегти" action="#{partnersBankBean.create()}"/>
                 </div>
             </h:form>
         </main>

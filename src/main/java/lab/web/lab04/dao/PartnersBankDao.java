@@ -5,6 +5,7 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lab.web.lab04.data.Bank;
+import lab.web.lab04.data.PartnersBank;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -15,28 +16,29 @@ import java.util.logging.Logger;
 
 
 @Stateless
-public class BankDao {
+public class PartnersBankDao {
     @PersistenceContext
     EntityManager em;
 
-    public List<Bank> listAll() {
-        return em.createNamedQuery("Bank.findAll", Bank.class).getResultList();
+    public List<PartnersBank> listAll() {
+        return em.createNamedQuery("PartnersBank.findAll", PartnersBank.class).getResultList();
     }
 
-    public void create(Bank bank) {
-        em.persist(bank);
+    public void create(PartnersBank bank) {
+        Logger.getLogger("PB").warning("B_id: "+bank.getBank());
+//        em.persist(bank);
     }
 
     public void delete(Long id) {
-        Bank bank = em.find(Bank.class, id);
+        PartnersBank bank = em.find(PartnersBank.class, id);
         em.remove(bank);
     }
 
-    public Bank find(Long id) {
-        return em.find(Bank.class, id);
+    public PartnersBank find(Long id) {
+        return em.find(PartnersBank.class, id);
     }
 
-    public void update(Bank bank) {
+    public void update(PartnersBank bank) {
         em.merge(bank);
     }
 }

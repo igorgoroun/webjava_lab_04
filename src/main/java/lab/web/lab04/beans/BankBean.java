@@ -5,6 +5,7 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import lab.web.lab04.dao.BankDao;
 import lab.web.lab04.data.Bank;
+import lab.web.lab04.data.Partner;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,9 +32,21 @@ public class BankBean implements Serializable {
         bank = new Bank();
     }
 
-    public void delete(int id) {
+    public void delete(Long id) {
         System.out.println("Run delete bank");
         db.delete(id);
+    }
+
+
+    public String edit(Long id) {
+        bank = db.find(id);
+        return "banks_form";
+    }
+
+    public String update() {
+        db.update(bank);
+        bank = new Bank();
+        return "banks_list";
     }
 
 }

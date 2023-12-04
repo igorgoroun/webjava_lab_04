@@ -20,30 +20,7 @@
             </nav>
         </header>
         <main class="container">
-            <h1 class="display center">Банки</h1>
-            <h:form role="form">
-            <h:dataTable value="#{bankBean.list}" var="p">
-                <h:column>
-                    <f:facet name="header">ID</f:facet>
-                    <h:outputText value="#{p.id}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Name</f:facet>
-                    <h:outputText value="#{p.name}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Тел.</f:facet>
-                    <h:outputText value="#{p.telNumber}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Дії</f:facet>
-                    <h:commandButton value="Видалити" onclick="return confirm('Ви впевнені?');" action="#{bankBean.delete(p.id)}"/>
-                    <h:commandButton value="Редагувати" action="#{bankBean.edit(p.id)}" style="margin-left: 1em;"/>
-                </h:column>
-            </h:dataTable>
-            </h:form>
-
-            <h2 class="display center">Додати банк</h2>
+            <h2 class="display center">Змінити банк</h2>
             <h:form role="form">
                 <div class="input_row">
                     <h:outputLabel value="Назва:"/>
@@ -55,7 +32,7 @@
                 </div>
                 <div class="input_row">
                     <label> </label>
-                    <h:commandButton value="Додати" action="#{bankBean.addRecord()}"/>
+                    <h:commandButton value="Зберегти" action="#{bankBean.update()}"/>
                 </div>
             </h:form>
         </main>

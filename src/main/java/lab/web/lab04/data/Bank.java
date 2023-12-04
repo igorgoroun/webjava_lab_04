@@ -1,14 +1,30 @@
 package lab.web.lab04.data;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table(name = "banks")
+@NamedQueries({
+        @NamedQuery(name = "Bank.findAll", query = "select b from Bank b order by b.id desc")
+})
 public class Bank {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @NotNull
+    @Lob
+    @Column(name = "name", nullable = false)
     private String name;
-    private String tel_number;
+
+    @Lob
+    @Column(name = "tel_number")
+    private String telNumber;
+
 }

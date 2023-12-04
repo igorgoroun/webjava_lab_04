@@ -22,7 +22,7 @@
         <main class="container">
             <h1 class="display center">Партнери</h1>
             <h:form role="form">
-            <h:dataTable value="#{partnerBean.getList()}" var="p">
+            <h:dataTable value="#{partnerBean.list}" var="p">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                     <h:outputText value="#{p.id}"/>
@@ -33,15 +33,16 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">Тел.</f:facet>
-                    <h:outputText value="#{p.tel_number}"/>
+                    <h:outputText value="#{p.telNumber}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">ЄДРПОУ</f:facet>
                     <h:outputText value="#{p.reg}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header"> </f:facet>
-                    <h:commandButton value="Видалити" action="#{partnerBean.delete(p.id)}"/>
+                    <f:facet name="header">Дії</f:facet>
+                    <h:commandButton value="Видалити" onclick="return confirm('Ви впевнені?');" action="#{partnerBean.delete(p.id)}"/>
+                    <h:commandButton value="Редагувати" action="#{partnerBean.edit(p.id)}" style="margin-left: 1em;"/>
                 </h:column>
             </h:dataTable>
             </h:form>
@@ -58,7 +59,7 @@
                 </div>
                 <div class="input_row">
                     <h:outputLabel value="Телефон:"/>
-                    <h:inputText value="#{partnerBean.partner.tel_number}"/>
+                    <h:inputText value="#{partnerBean.partner.telNumber}"/>
                 </div>
                 <div class="input_row">
                     <h:outputLabel value="ІПН:"/>
@@ -74,7 +75,7 @@
                 </div>
                 <div class="input_row">
                     <label> </label>
-                    <h:commandButton value="Зберегти" action="#{partnerBean.addRecord()}"/>
+                    <h:commandButton value="Додати" action="#{partnerBean.create()}"/>
                 </div>
             </h:form>
         </main>
