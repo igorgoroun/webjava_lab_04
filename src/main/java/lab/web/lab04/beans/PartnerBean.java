@@ -22,6 +22,7 @@ public class PartnerBean implements Serializable {
     private Partner partner = new Partner();
 
     public List<Partner> getList() {
+        partner = new Partner();
         return db.listAll();
     }
 

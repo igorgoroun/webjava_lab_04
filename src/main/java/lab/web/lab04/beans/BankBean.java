@@ -24,6 +24,7 @@ public class BankBean implements Serializable {
     private BankDao db;
 
     public List<Bank> getList() {
+        bank = new Bank();
         return db.listAll();
     }
 

@@ -26,7 +26,7 @@ public class PartnersBankDao {
 
     public void create(PartnersBank bank) {
         Logger.getLogger("PB").warning("B_id: "+bank.getBank());
-//        em.persist(bank);
+        em.persist(bank);
     }
 
     public void delete(Long id) {

@@ -46,19 +46,24 @@
             </h:dataTable>
             </h:form>
 
-            <h2 class="display center">Додати новий</h2>
+            <h2 class="display center">Додати рахунок партнеру</h2>
             <h:form role="form">
                 <div class="input_row">
                     <h:outputLabel value="Партнер:"/>
-                    <h:selectOneListbox value = "#{partnersBankBean.partnersBank.partner.id}" size="1" >
+                    <h:selectOneListbox value = "#{partnersBankBean.pbDTO.partner_id}" size="1" >
                         <f:selectItems value="#{partnerBean.list}" var="p" itemValue="#{p.id}" itemLabel="#{p.name}" />
                     </h:selectOneListbox>
                 </div>
                 <div class="input_row">
                     <h:outputLabel value="Банк:"/>
-                    <h:selectOneListbox value="#{partnersBankBean.partnersBank.bank.id}" size="1">
+                    <h:selectOneListbox value="#{partnersBankBean.pbDTO.bank_id}" size="1">
+                        <f:selectItem itemLabel="-- Новий банк --" itemValue="0" />
                         <f:selectItems value="#{bankBean.list}" var="bb" itemValue="#{bb.id}" itemLabel="#{bb.name}" />
                     </h:selectOneListbox>
+                </div>
+                <div class="input_row">
+                    <h:outputLabel value="Новий банк:"/>
+                    <h:inputText value="#{partnersBankBean.pbDTO.new_bank_name}"/>
                 </div>
                 <div class="input_row">
                     <h:outputLabel value="Номер рахунку:"/>
